@@ -97,32 +97,40 @@ class CalculationsController < ApplicationController
     # The numbers the user input are in the array @numbers.
     # ================================================================================
 
-    @sorted_numbers = "Replace this string with your answer."
+    @sorted_numbers = @numbers.sort
 
-    @count = "Replace this string with your answer."
+    @count = @numbers.count
 
-    @minimum = "Replace this string with your answer."
+    @minimum = @numbers.min
 
-    @maximum = "Replace this string with your answer."
+    @maximum = @numbers.max
 
-    @range = "Replace this string with your answer."
+    @range = @numbers.max - @numbers.min
 
-    @median = "Replace this string with your answer."
+    if @numbers.count.odd?
+      range_odd_count = @numbers.count / 2
+      @median = @numbers[range_odd_count]
+    elsif @numbers.count.even?
+      range_even_count_upper = @numbers.count / 2
+      range_even_count_lower = @numbers.count / 2 - 1
+      @median = (@numbers[range_even_count_upper] + @numbers[range_even_count_lower])/2
+    else
+      @median = "Error"
 
-    @sum = "Replace this string with your answer."
+      @sum = "Replace this string with your answer."
 
-    @mean = "Replace this string with your answer."
+      @mean = "Replace this string with your answer."
 
-    @variance = "Replace this string with your answer."
+      @variance = "Replace this string with your answer."
 
-    @standard_deviation = "Replace this string with your answer."
+      @standard_deviation = "Replace this string with your answer."
 
-    @mode = "Replace this string with your answer."
+      @mode = "Replace this string with your answer."
 
-    # ================================================================================
-    # Your code goes above.
-    # ================================================================================
+      # ================================================================================
+      # Your code goes above.
+      # ================================================================================
 
-    render("descriptive_statistics.html.erb")
+      render("descriptive_statistics.html.erb")
+    end
   end
-end

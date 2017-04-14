@@ -11,13 +11,21 @@ class CalculationsController < ApplicationController
     # ================================================================================
 
 
-    @word_count = "Replace this string with your answer."
+    @word_count = @text.split.count
 
-    @character_count_with_spaces = "Replace this string with your answer."
+    @character_count_with_spaces = @text.length
+    text_wo_spaces = @text.gsub(" ","")
+    text_wo_linefeed = text_wo_spaces.gsub("\n","")
+    text_wo_cr = text_wo_linefeed.gsub("\r","")
+    text_wo_tab = text_wo_cr.gsub("\t","")
 
-    @character_count_without_spaces = "Replace this string with your answer."
+    @character_count_without_spaces = text_wo_cr.length
 
-    @occurrences = "Replace this string with your answer."
+    down_case = @text.downcase
+    no_punctuation = down_case.gsub(/[^a-z0-9\s]/i,"")
+    clean_word_array = no_punctuation.split
+
+    @occurrences = clean_word_array.count(@special_word)
 
     # ================================================================================
     # Your code goes above.
@@ -38,7 +46,12 @@ class CalculationsController < ApplicationController
     # The principal value the user input is in the decimal @principal.
     # ================================================================================
 
-    @monthly_payment = "Replace this string with your answer."
+    monthly_apr = @apr/100/12
+    months = @years*12
+    numerator = monthly_apr*((1+monthly_apr)**months)
+    denominator = ((1+monthly_apr)**months) - 1
+
+    @monthly_payment = @principal*(numerator/denominator)
 
     # ================================================================================
     # Your code goes above.
@@ -60,12 +73,14 @@ class CalculationsController < ApplicationController
     #   number of seconds as a result.
     # ================================================================================
 
-    @seconds = "Replace this string with your answer."
-    @minutes = "Replace this string with your answer."
-    @hours = "Replace this string with your answer."
-    @days = "Replace this string with your answer."
-    @weeks = "Replace this string with your answer."
-    @years = "Replace this string with your answer."
+    date_diff = @ending - @starting
+
+    @seconds = date_diff
+    @minutes = date_diff/60
+    @hours = date_diff/(60*60)
+    @days = date_diff/(60*60*24)
+    @weeks = date_diff/(60*60*24*7)
+    @years = date_diff/(60*60*24*7*52)
 
     # ================================================================================
     # Your code goes above.

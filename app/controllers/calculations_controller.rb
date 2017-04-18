@@ -109,28 +109,29 @@ class CalculationsController < ApplicationController
 
     if @numbers.count.odd?
       range_odd_count = @numbers.count / 2
-      @median = @numbers[range_odd_count]
+      @median = @sorted_numbers[range_odd_count]
     elsif @numbers.count.even?
       range_even_count_upper = @numbers.count / 2
       range_even_count_lower = @numbers.count / 2 - 1
-      @median = (@numbers[range_even_count_upper] + @numbers[range_even_count_lower])/2
+      @median = (@sorted_numbers[range_even_count_upper] + @sorted_numbers[range_even_count_lower])/2
     else
       @median = "Error"
-
-      @sum = "Replace this string with your answer."
-
-      @mean = "Replace this string with your answer."
-
-      @variance = "Replace this string with your answer."
-
-      @standard_deviation = "Replace this string with your answer."
-
-      @mode = "Replace this string with your answer."
-
-      # ================================================================================
-      # Your code goes above.
-      # ================================================================================
-
-      render("descriptive_statistics.html.erb")
     end
+
+    @sum = @numbers.sum
+
+    @mean = @numbers.sum/2
+
+    @variance = "Replace this string with your answer."
+
+    @standard_deviation = "Replace this string with your answer."
+
+    @mode = "Replace this string with your answer."
+
+    # ================================================================================
+    # Your code goes above.
+    # ================================================================================
+
+    render("descriptive_statistics.html.erb")
   end
+end

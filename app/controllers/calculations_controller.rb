@@ -120,9 +120,20 @@ class CalculationsController < ApplicationController
 
     @sum = @numbers.sum
 
-    @mean = @numbers.sum/2
+    @mean = (@numbers.sum)/2
 
-    @variance = "Replace this string with your answer."
+    # (each value - mean) squared and then sum that all up
+
+    mean = @mean
+    squared_diffs = []
+
+    @numbers.each do |number|
+      mean_diff = (number - mean)
+      squared_mean_diff = (mean_diff)**2
+      squared_diffs.push(squared_mean_diff)
+    end
+
+    @variance = squared_diffs.sum
 
     @standard_deviation = "Replace this string with your answer."
 

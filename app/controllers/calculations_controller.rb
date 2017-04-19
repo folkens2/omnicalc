@@ -137,9 +137,19 @@ class CalculationsController < ApplicationController
 
     @standard_deviation = Math.sqrt(@variance)
 
+    sorted_numbers = @numbers.sort
+    unique_numbers = sorted_numbers.uniq
+    number_frequency = []
 
+    unique_numbers.each do |unumber|
+      unique_number_count = sorted_numbers.count(unumber)
+      number_frequency.push(unique_number_count)
+    end
 
-    @mode = "Replace this string with your answer."
+    max_frequency = number_frequency.max
+    position = number_frequency.index(max_frequency)
+
+    @mode = unique_numbers[position]
 
     # ================================================================================
     # Your code goes above.

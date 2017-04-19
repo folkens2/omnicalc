@@ -120,7 +120,7 @@ class CalculationsController < ApplicationController
 
     @sum = @numbers.sum
 
-    @mean = (@numbers.sum)/2
+    @mean = (@numbers.sum)/@numbers.count
 
     # (each value - mean) squared and then sum that all up
 
@@ -135,7 +135,7 @@ class CalculationsController < ApplicationController
 
     @variance = squared_diffs.sum
 
-    @standard_deviation = "Replace this string with your answer."
+    @standard_deviation = Math.sqrt(@variance)
 
     @mode = "Replace this string with your answer."
 

@@ -133,7 +133,7 @@ class CalculationsController < ApplicationController
       squared_diffs.push(squared_mean_diff)
     end
 
-    @variance = squared_diffs.sum
+    @variance = squared_diffs.sum / (squared_diffs.count - 1)
 
     @standard_deviation = Math.sqrt(@variance)
 
